@@ -17,6 +17,8 @@ echo "=========== echo 'DEVICE partitions' | sudo tee -a /etc/mdadm/mdadm.conf"
 echo "DEVICE partitions" | sudo tee -a /etc/mdadm/mdadm.conf
 echo "=========== sudo mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' | sudo tee -a /etc/mdadm/mdadm.conf" 
 sudo mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' | sudo tee -a /etc/mdadm/mdadm.conf 
+echo "=========== parted -s /dev/md0 mklable gpt"
+parted -s /dev/md0 mklable gpt
 echo "=========== parted /dev/md0 mkpart primary ext4 0% 20%"
 parted /dev/md0 mkpart primary ext4 0% 20%
 echo "=========== parted /dev/md0 mkpart primary ext4 20% 40%"
