@@ -31,8 +31,8 @@ echo "=========== parted /dev/md0 mkpart primary ext4 80% 100%"
 parted /dev/md0 mkpart primary ext4 80% 100%
 echo "=========== for i in \$(seq 1 5); do sudo mkfs.ext4 /dev/md0p\$i; done"
 for i in $(seq 1 5); do sudo mkfs.ext4 /dev/md0p$i; done
-echo "=========== for i in \$(seq 1 5); do sudo mkdir -p /raid/part{1,2,3,4,5}"
-for i in $(seq 1 5); do sudo mkdir -p /raid/part{1,2,3,4,5}
+echo "=========== sudo mkdir -p /raid/part{1,2,3,4,5}"
+sudo mkdir -p /raid/part{1,2,3,4,5}
 echo "=========== for i in \$(seq 1 5); do sudo mount /dev/md0p\$i /raid/part\$i; done"
 for i in $(seq 1 5); do sudo mount /dev/md0p$i /raid/part$i; done
 
