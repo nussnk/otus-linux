@@ -17,3 +17,20 @@ echo "=========== echo 'DEVICE partitions' | sudo tee -a /etc/mdadm/mdadm.conf"
 echo "DEVICE partitions" | sudo tee -a /etc/mdadm/mdadm.conf
 echo "=========== sudo mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' | sudo tee -a /etc/mdadm/mdadm.conf" 
 sudo mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' | sudo tee -a /etc/mdadm/mdadm.conf 
+echo "=========== parted /dev/md0 mkpart primary ext4 0% 20%"
+parted /dev/md0 mkpart primary ext4 0% 20%
+echo "=========== parted /dev/md0 mkpart primary ext4 20% 40%"
+parted /dev/md0 mkpart primary ext4 20% 40%
+echo "=========== parted /dev/md0 mkpart primary ext4 40% 60%"
+parted /dev/md0 mkpart primary ext4 40% 60%
+echo "=========== parted /dev/md0 mkpart primary ext4 60% 80%"
+parted /dev/md0 mkpart primary ext4 60% 80%
+echo "=========== parted /dev/md0 mkpart primary ext4 80% 100%"
+parted /dev/md0 mkpart primary ext4 80% 100%
+echo "=========== for i in $(seq 1 5) do; sudo mkfs.ext4 /dev/md0p$i; done"
+for i in $(seq 1 5) do; sudo mkfs.ext4 /dev/md0p$i; done
+echo "=========== for i in $(seq 1 5) do; sudo mkdir -p /raid/part{1,2,3,4,5}"
+for i in $(seq 1 5) do; sudo mkdir -p /raid/part{1,2,3,4,5}
+echo "=========== for i in $(seq 1 5) do; sudo mount /dev/md0p$i /raid/part$i; done"
+for i in $(seq 1 5) do; sudo mount /dev/md0p$i /raid/part$i; done
+
